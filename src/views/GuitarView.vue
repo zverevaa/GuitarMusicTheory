@@ -1,7 +1,10 @@
 <template>
-  <div>Guitar view</div>
+    <div>Guitar view</div>
+    <InstrumentFretboard />
 </template>
 
-<script setup></script>
+<script setup>
+import InstrumentFretboard from '@/components/InstrumentFretboard.vue'
+</script>
 
 <style lang="scss" scoped></style>
