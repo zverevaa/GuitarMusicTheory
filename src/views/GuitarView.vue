@@ -1,6 +1,6 @@
 <template>
     <div>Guitar view</div>
-    <InstrumentFretboard />
+    <InstrumentFretboard class="instrument" />
 </template>
 
 <script setup>

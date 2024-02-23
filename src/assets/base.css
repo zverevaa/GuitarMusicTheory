@@ -1,6 +1,8 @@
 /* color palette*/
 :root {
-
+--fret-color: #6499d0;
+--fret-circle-color: #98c8e0;
+--string-color: #fff;
 }
 
 
@@ -29,4 +31,10 @@ body {
     'Helvetica Neue',
     sans-serif;
   font-size: 15px;
+}
+
+.instrument {
+  width: 100%;
+  height: 100%;
+  
 }
