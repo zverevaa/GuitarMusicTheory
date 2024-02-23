@@ -1,7 +1,7 @@
 <template>
     <div class="instrument-string">
         <div class="instrument-notes">
-            <div class="instrument-note" v-for="note in notes" :key="note">
+            <div class="instrument-note" v-for="note in currentStringNotes" :key="note">
                 <div class="instrument-string-circle">{{ note }}</div>
                 <div class="instrument-string-render"></div>
             </div>
@@ -11,9 +11,12 @@
 
 <script setup>
 import { useStringsStore } from '@/stores/strings'
-
+const props = defineProps({
+    idx: Number
+})
 const stringsStore = useStringsStore()
-const notes = stringsStore.notes
+const currentString = stringsStore.strings[props.idx]
+const currentStringNotes = currentString.notes
 </script>
 
 <style lang="scss">
