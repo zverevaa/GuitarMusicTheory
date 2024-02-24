@@ -1,7 +1,12 @@
 <template>
     <div class="instrument-string">
         <div class="instrument-notes">
-            <div class="instrument-note" v-for="note in currentStringNotes" :key="note">
+            <div
+                class="instrument-note"
+                v-for="(note, index) in currentStringNoteNames"
+                :key="note"
+                @click="playNote(currentStringNotes[index])"
+            >
                 <div class="instrument-string-circle">{{ note }}</div>
                 <div class="instrument-string-render"></div>
             </div>
@@ -11,12 +16,20 @@
 
 <script setup>
 import { useStringsStore } from '@/stores/strings'
+import * as Tone from 'tone'
 const props = defineProps({
     idx: Number
 })
 const stringsStore = useStringsStore()
 const currentString = stringsStore.strings[props.idx]
+const currentStringNoteNames = currentString.noteNames
 const currentStringNotes = currentString.notes
+const synth = new Tone.Synth().toDestination()
+synth.oscillator.type = 'sine'
+
+const playNote = (note) => {
+    synth.triggerAttackRelease(note, '8n')
+}
 </script>
 
 <style lang="scss">
