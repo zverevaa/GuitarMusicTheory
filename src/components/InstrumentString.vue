@@ -20,15 +20,22 @@ import * as Tone from 'tone'
 const props = defineProps({
     idx: Number
 })
+
 const stringsStore = useStringsStore()
 const currentString = stringsStore.strings[props.idx]
 const currentStringNoteNames = currentString.noteNames
 const currentStringNotes = currentString.notes
 const synth = new Tone.Synth().toDestination()
 synth.oscillator.type = 'sine'
+let buffer
 
 const playNote = (note) => {
-    synth.triggerAttackRelease(note, '8n')
+    Tone.start()
+    buffer = new Tone.ToneAudioBuffer(`../src/assets/notes/${note}.wav`, () => {
+        const player = new Tone.Player(buffer.get()).toDestination()
+        player.start()
+    })
+    console.log(note)
 }
 </script>
 

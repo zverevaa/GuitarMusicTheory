@@ -7,7 +7,6 @@
 <script setup>
 import InstrumentString from './InstrumentString.vue'
 import { useStringsStore } from '@/stores/strings'
-
 const stringsStore = useStringsStore()
 
 const stringTuning = stringsStore.tuning
