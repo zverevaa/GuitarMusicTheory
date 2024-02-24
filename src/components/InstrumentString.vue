@@ -51,6 +51,8 @@ const playNote = (note) => {
             left: 0;
             height: 6px;
             background-color: var(--string-color);
+            user-select: none;
+            pointer-events: none;
         }
 
         &-circle {
