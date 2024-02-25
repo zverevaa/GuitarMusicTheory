@@ -1,5 +1,14 @@
 <template>
     <div class="instrument-string">
+        <div class="instrument-string-mute">
+            <i class="fa-solid fa-plus fa-2xl"></i>
+            <div class="dash"></div>
+        </div>
+
+        <div class="instrument-string-tuning">
+            <span>{{ currentString.tuning }}</span>
+        </div>
+        <div class="instrument-string-nut"></div>
         <div class="instrument-notes">
             <div
                 class="instrument-note"
@@ -44,11 +53,60 @@ const playNote = (note) => {
     &-string {
         display: flex;
         justify-content: center;
+        align-items: center;
+        &-mute {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 3px solid black;
+            height: 35px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            z-index: 2;
+            &:hover {
+                cursor: pointer;
+                i {
+                    display: block;
+                }
+            }
+            .dash {
+                position: absolute;
+                left: 100%;
+                background-color: black;
+                height: 3px;
+                width: 1rem;
+            }
+            i {
+                display: none;
+                rotate: 45deg;
+            }
+        }
+        &-nut {
+            height: 50px;
+            width: 0.5rem;
+            background-color: black;
+        }
+        &-tuning {
+            aspect-ratio: 1;
+            height: 25px;
+            background-color: #98c8e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            left: 1.2rem;
+            transform: rotate(45deg);
+            span {
+                transform: rotate(-45deg);
+            }
+        }
 
         &-render {
             width: inherit;
             position: absolute;
-            left: 0;
+            right: 0;
             height: 6px;
             background-color: var(--string-color);
             user-select: none;
@@ -72,6 +130,7 @@ const playNote = (note) => {
         height: 50px;
         display: flex;
         justify-content: center;
+        align-items: center;
         position: relative;
         z-index: 0;
     }
