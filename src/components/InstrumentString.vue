@@ -1,15 +1,18 @@
 <template>
     <div class="instrument-string">
-        <div class="instrument-string-mute">
-            <i class="fa-solid fa-plus fa-2xl"></i>
+        <div @click="stringsStore.muteString(props.idx)" class="instrument-string-mute">
+            <i v-show="currentString.isMuted == true" class="fa-solid fa-plus fa-2xl"></i>
             <div class="dash"></div>
         </div>
 
         <div class="instrument-string-tuning">
             <span>{{ currentString.tuning }}</span>
         </div>
-        <div class="instrument-string-nut"></div>
-        <div class="instrument-notes">
+        <div
+            class="instrument-string-nut"
+            :class="currentString.isMuted == true ? 'muted' : ''"
+        ></div>
+        <div class="instrument-notes" :class="currentString.isMuted == true ? 'muted' : ''">
             <div
                 class="instrument-note"
                 v-for="(note, index) in currentStringNoteNames"
@@ -40,6 +43,9 @@ let buffer
 
 const playNote = (note) => {
     Tone.start()
+    if (currentString.isMuted == true) {
+        return
+    }
     buffer = new Tone.ToneAudioBuffer(`../src/assets/notes/${note}.wav`, () => {
         const player = new Tone.Player(buffer.get()).toDestination()
         player.start()
@@ -78,7 +84,6 @@ const playNote = (note) => {
                 width: 1rem;
             }
             i {
-                display: none;
                 rotate: 45deg;
             }
         }
@@ -148,5 +153,9 @@ const playNote = (note) => {
             cursor: pointer;
         }
     }
+}
+
+.muted {
+    opacity: 0.5;
 }
 </style>
