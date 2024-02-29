@@ -1,7 +1,13 @@
 <template>
     <div class="instrument-string">
-        <div @click="stringsStore.muteString(props.idx)" class="instrument-string-mute">
-            <i v-show="currentString.isMuted == true" class="fa-solid fa-plus fa-2xl"></i>
+        <div
+            @click="stringsStore.muteString(props.idx), console.log(currentString.isMuted)"
+            class="instrument-string-mute"
+        >
+            <div class="muted-icon" v-show="currentString.isMuted == true">
+                <i class="fa-solid fa-plus fa-2xl"></i>
+            </div>
+
             <div class="dash"></div>
         </div>
 
@@ -17,7 +23,13 @@
                 class="instrument-note"
                 v-for="(note, index) in currentStringNoteNames"
                 :key="note"
-                @click="playNote(currentStringNotes[index])"
+                @click="
+                    () => {
+                        currentString.isMuted == false
+                            ? stringsStore.playNote(currentStringNotes[index])
+                            : ''
+                    }
+                "
             >
                 <div class="instrument-string-circle">{{ note }}</div>
                 <div class="instrument-string-render"></div>
@@ -28,30 +40,30 @@
 
 <script setup>
 import { useStringsStore } from '@/stores/strings'
-import * as Tone from 'tone'
+import { useQuizStore } from '@/stores/quiz'
 const props = defineProps({
     idx: Number
 })
 
 const stringsStore = useStringsStore()
+const quizStore = useQuizStore()
 const currentString = stringsStore.strings[props.idx]
 const currentStringNoteNames = currentString.noteNames
 const currentStringNotes = currentString.notes
-const synth = new Tone.Synth().toDestination()
-synth.oscillator.type = 'sine'
-let buffer
 
-const playNote = (note) => {
-    Tone.start()
-    if (currentString.isMuted == true) {
-        return
-    }
-    buffer = new Tone.ToneAudioBuffer(`../src/assets/notes/${note}.wav`, () => {
-        const player = new Tone.Player(buffer.get()).toDestination()
-        player.start()
-    })
-    console.log(note)
-}
+// let buffer
+
+// const playNote = (note) => {
+//     Tone.start()
+//     if (currentString.isMuted == true) {
+//         return
+//     }
+//     buffer = new Tone.ToneAudioBuffer(`../src/assets/notes/${note}.wav`, () => {
+//         const player = new Tone.Player(buffer.get()).toDestination()
+//         player.start()
+//     })
+//     console.log(note)
+// }
 </script>
 
 <style lang="scss">
@@ -83,7 +95,7 @@ const playNote = (note) => {
                 height: 3px;
                 width: 1rem;
             }
-            i {
+            .muted-icon {
                 rotate: 45deg;
             }
         }

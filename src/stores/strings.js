@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import * as Tone from 'tone'
 
 export const useStringsStore = defineStore('strings', () => {
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
@@ -86,9 +87,29 @@ export const useStringsStore = defineStore('strings', () => {
         console.log(strings.value[id].isMuted)
     }
 
-    const workinTest = () => {
-        console.log('is working')
+    let buffer
+    let activeNote = ref('')
+
+    const playNote = (note) => {
+        Tone.start()
+        // if (currentString.isMuted == true) {
+        //     return
+        // }
+        buffer = new Tone.ToneAudioBuffer(`../src/assets/notes/${note}.wav`, () => {
+            const player = new Tone.Player(buffer.get()).toDestination()
+            player.start()
+        })
+        activeNote.value = note
+        console.log(note)
     }
 
-    return { notes, tuning, strings, stringsDefault, muteString, workinTest }
+    return {
+        notes,
+        tuning,
+        strings,
+        stringsDefault,
+        activeNote,
+        muteString,
+        playNote
+    }
 })
