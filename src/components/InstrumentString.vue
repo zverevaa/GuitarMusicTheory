@@ -51,20 +51,6 @@ const stringsStore = useStringsStore()
 const currentString = stringsStore.strings[props.idx]
 const currentStringNoteNames = currentString.noteNames
 const currentStringNotes = currentString.notes
-
-// let buffer
-
-// const playNote = (note) => {
-//     Tone.start()
-//     if (currentString.isMuted == true) {
-//         return
-//     }
-//     buffer = new Tone.ToneAudioBuffer(`../src/assets/notes/${note}.wav`, () => {
-//         const player = new Tone.Player(buffer.get()).toDestination()
-//         player.start()
-//     })
-//     console.log(note)
-// }
 </script>
 
 <style lang="scss">
