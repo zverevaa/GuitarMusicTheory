@@ -32,7 +32,7 @@
                 "
             >
                 <div class="instrument-string-circle">{{ note }}</div>
-                <div class="instrument-string-render"></div>
+                <div class="instrument-string-render" :class="`string${props.idx + 1}`"></div>
             </div>
         </div>
     </div>
@@ -107,7 +107,7 @@ const currentStringNotes = currentString.notes
         &-tuning {
             aspect-ratio: 1;
             height: 25px;
-            background-color: #98c8e0;
+            background-color: var(--fret-color);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -115,8 +115,13 @@ const currentStringNotes = currentString.notes
             z-index: 2;
             left: 1.2rem;
             transform: rotate(45deg);
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
             span {
                 transform: rotate(-45deg);
+                font-family: Inter, sans-serif;
+                font-weight: bold;
+                font-size: 1rem;
+                color: #fff;
             }
         }
 
@@ -124,10 +129,29 @@ const currentStringNotes = currentString.notes
             width: inherit;
             position: absolute;
             right: 0;
-            height: 6px;
+
             background-color: var(--string-color);
             user-select: none;
             pointer-events: none;
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+        }
+        .string1 {
+            height: 3px;
+        }
+        .string2 {
+            height: 3.5px;
+        }
+        .string3 {
+            height: 4px;
+        }
+        .string4 {
+            height: 4.5px;
+        }
+        .string5 {
+            height: 5px;
+        }
+        .string6 {
+            height: 5.5px;
         }
 
         &-circle {
@@ -138,8 +162,11 @@ const currentStringNotes = currentString.notes
             z-index: 2;
             width: 35px;
             height: 35px;
+            font-family: Inter, sans-serif;
+            font-weight: bold;
             background-color: #98c8e0;
             border-radius: 50%;
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
         }
     }
     &-notes {
@@ -160,7 +187,7 @@ const currentStringNotes = currentString.notes
         width: 100%;
         height: 100%;
         background-color: var(--fret-color);
-        border-left: 6px solid black;
+        border-left: 7px solid black;
         &:hover {
             cursor: pointer;
         }
