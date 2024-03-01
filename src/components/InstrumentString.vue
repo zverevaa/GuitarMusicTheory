@@ -4,7 +4,10 @@
             @click="stringsStore.muteString(props.idx), console.log(currentString.isMuted)"
             class="instrument-string-mute"
         >
-            <div class="muted-icon" v-show="currentString.isMuted == true">
+            <div
+                class="muted-icon"
+                :class="currentString.isMuted == true ? 'muted-icon-active' : ''"
+            >
                 <i class="fa-solid fa-plus fa-2xl"></i>
             </div>
 
@@ -40,13 +43,11 @@
 
 <script setup>
 import { useStringsStore } from '@/stores/strings'
-import { useQuizStore } from '@/stores/quiz'
 const props = defineProps({
     idx: Number
 })
 
 const stringsStore = useStringsStore()
-const quizStore = useQuizStore()
 const currentString = stringsStore.strings[props.idx]
 const currentStringNoteNames = currentString.noteNames
 const currentStringNotes = currentString.notes
@@ -84,9 +85,6 @@ const currentStringNotes = currentString.notes
             z-index: 2;
             &:hover {
                 cursor: pointer;
-                i {
-                    display: block;
-                }
             }
             .dash {
                 position: absolute;
@@ -96,6 +94,15 @@ const currentStringNotes = currentString.notes
                 width: 1rem;
             }
             .muted-icon {
+                opacity: 0%;
+                transition: all 0.2s ease-in-out;
+                &:hover {
+                    opacity: 100%;
+                    rotate: 45deg;
+                }
+            }
+            .muted-icon-active {
+                opacity: 100%;
                 rotate: 45deg;
             }
         }
@@ -196,5 +203,6 @@ const currentStringNotes = currentString.notes
 
 .muted {
     opacity: 0.5;
+    transition: opacity 0.1s ease-in-out;
 }
 </style>
