@@ -257,6 +257,7 @@ const checkIfClose = () => {
 
         &:active {
             background-color: #49c88d;
+            transition: transform 0.1s ease-out;
             transform: scale(0.9);
         }
     }

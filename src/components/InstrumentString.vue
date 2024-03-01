@@ -123,6 +123,7 @@ const currentStringNotes = currentString.notes
             left: 1.2rem;
             transform: rotate(45deg);
             box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+            user-select: none;
             span {
                 transform: rotate(-45deg);
                 font-family: Inter, sans-serif;
@@ -174,6 +175,7 @@ const currentStringNotes = currentString.notes
             background-color: #98c8e0;
             border-radius: 50%;
             filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+            user-select: none;
         }
     }
     &-notes {
