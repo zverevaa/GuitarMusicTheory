@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Ear training view</h1>
+        <TrainerHeader :header-view="'eartrainer'" />
         <InstrumentFretboard class="instrument" />
         <SingleNoteQuiz />
     </div>
@@ -9,6 +9,7 @@
 <script setup>
 import InstrumentFretboard from '@/components/InstrumentFretboard.vue'
 import SingleNoteQuiz from '@/components/SingleNoteQuiz.vue'
+import TrainerHeader from '@/components/TrainerHeader.vue'
 </script>
 
 <style lang="scss" scoped></style>
