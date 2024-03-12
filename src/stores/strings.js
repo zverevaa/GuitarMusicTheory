@@ -92,7 +92,7 @@ export const useStringsStore = defineStore('strings', () => {
 
     const playNote = (note) => {
         Tone.start()
-        buffer = new Tone.ToneAudioBuffer(`../src/assets/notes/${note}.wav`, () => {
+        buffer = new Tone.ToneAudioBuffer(`./notes/${note}.wav`, () => {
             const player = new Tone.Player(buffer.get()).toDestination()
             player.start()
         })
