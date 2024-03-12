@@ -1,1 +1,0 @@
-import{_ as e,a as r}from"./InstrumentFretboard-C9vcRKn7.js";import{c as t,a,F as s,o as c}from"./index-CjF7yt_H.js";const f={__name:"GuitarView",setup(n){return(o,_)=>(c(),t(s,null,[a(e,{"header-view":"fretboard"}),a(r,{class:"instrument"})],64))}};export{f as default};
